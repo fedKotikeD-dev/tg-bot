@@ -57,6 +57,7 @@ def calculator():
             print("Ошибка: Квадратный корень из отрицательного числа.")
     else:
         print("Неверный выбор операции.")
+    menu()
 
 def investment_calculator():
     print("Калькулятор дохода от инвестиций")
