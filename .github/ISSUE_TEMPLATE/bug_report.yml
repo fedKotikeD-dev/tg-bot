@@ -1,0 +1,39 @@
+name: "Баг-репорт"
+description: "Если что-то работает не так, как ожидалось."
+body:
+  - type: textarea
+    id: description
+    validations:
+      required: true
+    attributes:
+      label: "Описание"
+      description: "Опишите в чём заключается баг"
+
+  - type: textarea
+    id: reproduction
+    validations:
+      required: true
+    attributes:
+      label: "Шаги воспроизведения"
+      description: "Опишите шаги воспроизведения бага"
+      placeholder: |
+        1. Открыть интерфейс консоли
+        2. Нажать кнопку "Старт"
+        3. Получить ошибку...
+
+  - type: textarea
+    id: fixmethods
+    attributes:
+      label: "Решение"
+      description: |
+        По возможности, предположите шаги решения и/или фикса данной ошибки
+
+  - type: textarea
+    id: screenshots
+    validations:
+      required: true
+    attributes:
+      label: "Скриншоты"
+      description: |
+        Добавьте доказательства вашего бага
+        **Подсказка**: Вы можете прикрепить изображения щелкнув по области ниже, чтобы выделить её, а затем перетащив в нее файлы
