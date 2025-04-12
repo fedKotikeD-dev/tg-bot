@@ -5,16 +5,6 @@ import requests
 import telebot as tg
 bot = tg.TeleBot('8191435381:AAE5U5GhewCE72H4HcPhRnYm8SgkmOL4pMk')
 
-def investment_calculator():
-    print("Калькулятор дохода от инвестиций")
-    db.principal = float(input("Введите стартовую сумму (начальный капитал): "))
-    db.rate = float(input("Введите годовую процентную ставку (в %): "))
-    db.years = int(input("Введите срок вклада (в годах): "))
-    db.final_amount = db.principal * (1 + db.rate / 100) ** db.years
-    db.profit = db.final_amount - db.principal
-    print(f"Итоговая сумма: {db.final_amount:.2f}")
-    print(f"Чистая прибыль: {db.profit:.2f}")
-
 def get_weather(city):
     db.api_key = "d82c2b1bba01da54d351029ec7d961e6"
     db.base_url = "http://api.openweathermap.org/data/2.5/weather"
@@ -38,31 +28,6 @@ def get_weather(city):
             return f"Ошибка: {db.data['message']}"
     except Exception as e:
         return f"Не удалось получить данные о погоде: {e}"
-    
-# def menu():
-#     print("1. Игра 'Угадай число'")
-#     print("2. Калькулятор")
-#     print("3. Финансовый калькулятор")
-#     print("4. Прогноз погоды")
-#     print("5. Выход")
-#     choice = int(input("Выберите пункт меню: "))
-#     if choice == 1:
-#         random_number()
-#     elif choice == 2:
-#         calculator()
-#     elif choice == 3:
-#         investment_calculator()
-#     elif choice == 4:   
-#         db.city = input("Введите название города: ")
-#         db.weather_info = get_weather(db.city)
-#         print(db.weather_info)
-#     elif choice == 5:
-#         print("Выход из программы.")
-#         exit()
-#     else:
-#         print("Неверный выбор. Попробуйте снова.")
-#         time.sleep(2)
-#         menu()
 
 db.number = int(random.randint(1, 100))
 @bot.message_handler(content_types=['text'])
@@ -85,6 +50,9 @@ def start(message):
         time.sleep(0.1)
         bot.send_message(message.from_user.id, "Укажите номер операции")
         bot.register_next_step_handler(message, calculator1)
+    elif message.text == '/invest':
+        bot.send_message(message.from_user.id, "Введите ваш стартовый капитал")
+        bot.register_next_step_handler(message, invest1)
     else:
         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
 def say_answer_number(message):
@@ -152,5 +120,21 @@ def calculator_division(message):
         bot.send_message(message.from_user.id, f'{db.num1} : {db.num2} = {db.result}')
     else:
         bot.send_message(message.from_user.id, "Делить на ноль нельзя!")
+def invest1(message):
+    db.principal = float(message.text)
+    bot.send_message(message.from_user.id, "Введите годовую процентную ставку (в %)")
+    bot.register_next_step_handler(message, invest2)
+def invest2(message):
+    db.rate = float (message.text)
+    bot.send_message(message.from_user.id, "Введите срок вклада (в годах)")
+    bot.register_next_step_handler(message, invest3)
+def invest3(message):
+    db.years = float(message.text)
+    db.final_amount = db.principal * (1 + db.rate / 100) ** db.years
+    db.profit = db.final_amount - db.principal
+    bot.send_message(message.from_user.id, f'Вы получите {db.final_amount:.2f}')
+    time.sleep(0.1)
+    bot.send_message(message.from_user.id, f'Чистая прибыль: {db.profit:.2f}')
+
 
 bot.polling(none_stop=True, interval=0)
