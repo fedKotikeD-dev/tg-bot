@@ -1,20 +1,9 @@
 import db
-import RUN_THIS
 import random
 import time
 import requests
-
-def random_number():
-    db.number = int(random.randint(1, 100))
-    while True:
-        db.guess = int(input("Назовите число от 1 до 100: "))
-        if db.guess == db.number:
-            print("Вы угадали!")
-            break
-        elif db.guess < db.number:
-            print("Загаданное число больше.")
-        else:
-            print("Загаданное число меньше.")
+import telebot as tg
+bot = tg.TeleBot('ne skazhy')
 
 def calculator():
     print("Расширенный калькулятор")
@@ -70,13 +59,13 @@ def investment_calculator():
     print(f"Чистая прибыль: {db.profit:.2f}")
 
 def get_weather(city):
-    db.api_key = "d82c2b1bba01da54d351029ec7d961e6"  # Замените на ваш API-ключ OpenWeather
+    db.api_key = "d82c2b1bba01da54d351029ec7d961e6"
     db.base_url = "http://api.openweathermap.org/data/2.5/weather"
     db.params = {
         "q": db.city,
         "appid": db.api_key,
-        "units": "metric",  # Используем градусы Цельсия
-        "lang": "ru"       # Локализация на русский язык
+        "units": "metric",
+        "lang": "ru"
     }
 
     try:
@@ -118,4 +107,26 @@ def menu():
         time.sleep(2)
         menu()
 
-menu()
+db.number = int(random.randint(1, 100))
+@bot.message_handler(content_types=['text'])
+def random_number(message):
+    if message.text == '/random':
+        bot.send_message(message.from_user.id, "Назовите число от 1 до 100")
+        bot.register_next_step_handler(message, say_answer_number)
+    elif message.text == "Привет":
+        bot.send_message(message.from_user.id, "Привет, чем я могу тебе помочь?")
+    elif message.text == "/help":
+        bot.send_message(message.from_user.id, "Напиши привет")
+    else:
+        bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
+def say_answer_number(message):
+    db.guess = int(message.text)
+    if db.guess == db.number:
+        bot.send_message(message.from_user.id, "Вы угадали!")
+        db.number = int(random.randint(1, 100))
+    elif db.guess < db.number:
+        bot.send_message(message.from_user.id, "Загаданное число больше!")
+    elif db.guess > db.number:
+        bot.send_message(message.from_user.id, "Загаданное число меньше!")
+
+bot.polling(none_stop=True, interval=0)
