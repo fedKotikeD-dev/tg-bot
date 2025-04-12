@@ -117,3 +117,5 @@ def menu():
         print("Неверный выбор. Попробуйте снова.")
         time.sleep(2)
         menu()
+
+menu()
