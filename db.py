@@ -21,6 +21,7 @@ base_url = None
 params = None
 response = None
 data = None
+city = None
 city_name = None
 temp = None
 weather_desc = None
