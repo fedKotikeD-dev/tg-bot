@@ -98,7 +98,7 @@ def menu():
     print("2. Калькулятор")
     print("3. Финансовый калькулятор")
     print("4. Прогноз погоды")
-    print("3. Выход")
+    print("5. Выход")
     choice = int(input("Выберите пункт меню: "))
     if choice == 1:
         random_number()
