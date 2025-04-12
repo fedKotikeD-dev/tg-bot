@@ -29,7 +29,7 @@ def start(message):
     elif message.text == '/invest':
         bot.send_message(message.from_user.id, "Введите ваш стартовый капитал")
         bot.register_next_step_handler(message, invest1)
-    elif message.text == "/invest":
+    elif message.text == "/weather":
         bot.send_message(message.from_user.id, "Укажите город для определения погоды")
         bot.register_next_step_handler(message, weather)
     else:
