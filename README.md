@@ -7,9 +7,9 @@
 - [X] [Написать модуль "продвинутый калькулятор"](https://github.com/fedKotikeD/tg-bot/issues/8)
 - [ ] [Написать модуль "переводчик"](https://github.com/fedKotikeD/tg-bot/issues/2)
 - [X] [Написать модуль "прогнозы погоды"](https://github.com/fedKotikeD/tg-bot/issues/1)
-- [ ] [Подключить базовый шаблон тг](https://github.com/fedKotikeD/tg-bot/issues/3)
-- [ ] Пофиксить баги из подключения тг
-- [ ] [ЗБТ](https://github.com/fedKotikeD/tg-bot/milestone/1)
+- [X] [Подключить базовый шаблон тг](https://github.com/fedKotikeD/tg-bot/issues/3)
+- [X] Пофиксить баги из подключения тг
+- [X] [ЗБТ](https://github.com/fedKotikeD/tg-bot/milestone/1)
 - [ ] ОБТ
 - [ ] Релиз
 
