@@ -84,7 +84,7 @@ def get_weather(city):
         db.data = db.response.json()
 
         if db.response.status_code == 200:
-            db.city_name = db.ata["name"]
+            db.city_name = db.data["name"]
             db.temp = db.data["main"]["temp"]
             db.weather_desc = db.data["weather"][0]["description"]
             return f"Погода в {db.city_name}: {db.temp}°C, {db.weather_desc.capitalize()}."
