@@ -5,30 +5,6 @@ import requests
 import telebot as tg
 bot = tg.TeleBot('8191435381:AAE5U5GhewCE72H4HcPhRnYm8SgkmOL4pMk')
 
-def get_weather(city):
-    db.api_key = "d82c2b1bba01da54d351029ec7d961e6"
-    db.base_url = "http://api.openweathermap.org/data/2.5/weather"
-    db.params = {
-        "q": db.city,
-        "appid": db.api_key,
-        "units": "metric",
-        "lang": "ru"
-    }
-
-    try:
-        db.response = requests.get(db.base_url, params=db.params)
-        db.data = db.response.json()
-
-        if db.response.status_code == 200:
-            db.city_name = db.data["name"]
-            db.temp = db.data["main"]["temp"]
-            db.weather_desc = db.data["weather"][0]["description"]
-            return f"Погода в {db.city_name}: {db.temp}°C, {db.weather_desc.capitalize()}."
-        else:
-            return f"Ошибка: {db.data['message']}"
-    except Exception as e:
-        return f"Не удалось получить данные о погоде: {e}"
-
 db.number = int(random.randint(1, 100))
 @bot.message_handler(content_types=['text'])
 def start(message):
@@ -53,6 +29,9 @@ def start(message):
     elif message.text == '/invest':
         bot.send_message(message.from_user.id, "Введите ваш стартовый капитал")
         bot.register_next_step_handler(message, invest1)
+    elif message.text == "/invest":
+        bot.send_message(message.from_user.id, "Укажите город для определения погоды")
+        bot.register_next_step_handler(message, weather)
     else:
         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
 def say_answer_number(message):
@@ -135,6 +114,27 @@ def invest3(message):
     bot.send_message(message.from_user.id, f'Вы получите {db.final_amount:.2f}')
     time.sleep(0.1)
     bot.send_message(message.from_user.id, f'Чистая прибыль: {db.profit:.2f}')
-
+def weather(message):
+    db.city = message.text
+    db.api_key = "d82c2b1bba01da54d351029ec7d961e6"
+    db.base_url = "http://api.openweathermap.org/data/2.5/weather"
+    db.params = {
+        "q": db.city,
+        "appid": db.api_key,
+        "units": "metric",
+        "lang": "ru"
+    }
+    try:
+        db.response = requests.get(db.base_url, params=db.params)
+        db.data = db.response.json()
+        if db.response.status_code == 200:
+            db.city_name = db.data["name"]
+            db.temp = db.data["main"]["temp"]
+            db.weather_desc = db.data["weather"][0]["description"]
+            bot.send_message(message.from_user.id, f'Погода в {db.city_name}: {db.temp}°C, {db.weather_desc.capitalize()}')
+        else:
+            bot.send_message(message.from_user.id, f'Ошибка: {db.data['message']}')
+    except Exception as e:
+        bot.send_message(message.from_user.id, f'Не удалось получить данные о погоде.')
 
 bot.polling(none_stop=True, interval=0)
