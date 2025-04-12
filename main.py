@@ -3,7 +3,7 @@ import random
 import time
 import requests
 import telebot as tg
-bot = tg.TeleBot('8191435381:AAE5U5GhewCE72H4HcPhRnYm8SgkmOL4pMk')
+bot = tg.TeleBot('ne skazhy')
 
 db.number = int(random.randint(1, 100))
 @bot.message_handler(content_types=['text'])
