@@ -126,7 +126,11 @@ def say_answer_number(message):
         db.number = int(random.randint(1, 100))
     elif db.guess < db.number:
         bot.send_message(message.from_user.id, "Загаданное число больше!")
+        time.sleep(0.1)
+        random_number()
     elif db.guess > db.number:
         bot.send_message(message.from_user.id, "Загаданное число меньше!")
+        time.sleep(0.1)
+        random_number()
 
 bot.polling(none_stop=True, interval=0)
