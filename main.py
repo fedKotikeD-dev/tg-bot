@@ -52,6 +52,8 @@ def start(message):
     elif message.text == "/weather":
         bot.send_message(message.from_user.id, "Укажите город для определения погоды")
         bot.register_next_step_handler(message, weather)
+    elif message.text == "/start":
+        bot.send_message(message.from_user.id, "Привет! Я бот-помощник, обладающий интересными функциями. Со списком команд ты можешь ознакомиться в /help.")
     else:
         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
 def say_answer_number(message):
