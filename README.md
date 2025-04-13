@@ -10,8 +10,8 @@
 - [X] [Подключить базовый шаблон тг](https://github.com/fedKotikeD/tg-bot/issues/3)
 - [X] Пофиксить баги из подключения тг
 - [X] [ЗБТ](https://github.com/fedKotikeD/tg-bot/milestone/1)
-- [ ] ОБТ
-- [ ] Релиз
+- [ ] [ОБТ](https://github.com/fedKotikeD-dev/tg-bot/milestone/2)
+- [ ] [Релиз](https://github.com/fedKotikeD-dev/tg-bot/milestone/3)
 
 ## Лицензия
 [fedKotikeD bot](https://github.com/fedKotikeD/tg-bot) © 2025 by [fedkotiked](https://github.com/fedKotikeD/) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1)
