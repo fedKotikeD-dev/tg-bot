@@ -68,11 +68,11 @@ def say_answer_number(message):
     elif db.guess < db.number:
         bot.send_message(message.from_user.id, "Загаданное число больше!")
         time.sleep(0.1)
-        start()
+        # start()
     elif db.guess > db.number:
         bot.send_message(message.from_user.id, "Загаданное число меньше!")
         time.sleep(0.1)
-        start()
+        # start()
 def calculator1(message):
     db.choice = int(message.text)
     bot.send_message(message.from_user.id, "Укажите первое число")
