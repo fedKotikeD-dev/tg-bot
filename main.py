@@ -14,15 +14,35 @@ def start(message):
     elif message.text == "Привет":
         bot.send_message(message.from_user.id, "Привет, чем я могу тебе помочь?")
     elif message.text == "/help":
-        bot.send_message(message.from_user.id, "в работе")
+        bot.send_message(message.from_user.id, "Имеющиеся на данный момент команды:")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "Привет - поздороваться с ботом")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "/random - игра в угадывание числа")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "/help - эта команда")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "/calc - продвинутый калькулятор")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "/invest - калькулятор вклада")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "/weather - погода в указанном городе")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "/start - начальное приветствие бота")
     elif message.text == '/calc':
-        bot.send_message(message.from_user.id, "Возможные операции:" \
-        "1. Сложение" \
-        "2. Вычитание" \
-        "3. Умножение." \
-        "4. Деление" \
-        "5. Возведение в квадрат" \
-        "6. Квадратный корень")
+        bot.send_message(message.from_user.id, "Возможные операции:")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "1. Сложение")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "2. Вычитание")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "3. Умножение.")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "4. Деление")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "5. Возведение в квадрат")
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, "6. Квадратный корень")
         time.sleep(0.1)
         bot.send_message(message.from_user.id, "Укажите номер операции")
         bot.register_next_step_handler(message, calculator1)
