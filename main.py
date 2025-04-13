@@ -123,19 +123,28 @@ def calculator_division(message):
         bot.send_message(message.from_user.id, "Делить на ноль нельзя!")
 def invest1(message):
     db.principal = float(message.text)
-    bot.send_message(message.from_user.id, "Введите годовую процентную ставку (в %)")
-    bot.register_next_step_handler(message, invest2)
+    if db.principal >= 0:
+        bot.send_message(message.from_user.id, "Введите годовую процентную ставку (в %)")
+        bot.register_next_step_handler(message, invest2)
+    else:
+        bot.send_message(message.from_user.id, "Стартовый капитал не может быть меньше 0.")
 def invest2(message):
     db.rate = float (message.text)
-    bot.send_message(message.from_user.id, "Введите срок вклада (в годах)")
-    bot.register_next_step_handler(message, invest3)
+    if db.rate >= 0:
+        bot.send_message(message.from_user.id, "Введите срок вклада (в годах)")
+        bot.register_next_step_handler(message, invest3)
+    else:
+        bot.send_message(message.from_user.id, "Во вкладе не может быть отрицательный процент.")
 def invest3(message):
     db.years = float(message.text)
-    db.final_amount = db.principal * (1 + db.rate / 100) ** db.years
-    db.profit = db.final_amount - db.principal
-    bot.send_message(message.from_user.id, f'Вы получите {db.final_amount:.2f}')
-    time.sleep(0.1)
-    bot.send_message(message.from_user.id, f'Чистая прибыль: {db.profit:.2f}')
+    if db.years >= 0:
+        db.final_amount = db.principal * (1 + db.rate / 100) ** db.years
+        db.profit = db.final_amount - db.principal
+        bot.send_message(message.from_user.id, f'Вы получите {db.final_amount:.2f}')
+        time.sleep(0.1)
+        bot.send_message(message.from_user.id, f'Чистая прибыль: {db.profit:.2f}')
+    else:
+        bot.send_message(message.from_user.id, "Не может быть отрицательное количество лет.")
 def weather(message):
     db.city = message.text
     db.api_key = "d82c2b1bba01da54d351029ec7d961e6"
